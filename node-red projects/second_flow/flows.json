@@ -1,0 +1,170 @@
+[
+    {
+        "id": "bb72950cf85ad3fb",
+        "type": "tab",
+        "label": "second_flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3c5a635603919b91",
+        "type": "inject",
+        "z": "bb72950cf85ad3fb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 220,
+        "wires": [
+            [
+                "6ac978f140217a12"
+            ]
+        ]
+    },
+    {
+        "id": "6ac978f140217a12",
+        "type": "http request",
+        "z": "bb72950cf85ad3fb",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.csv",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 390,
+        "y": 220,
+        "wires": [
+            [
+                "a97163130541bf8c"
+            ]
+        ]
+    },
+    {
+        "id": "a97163130541bf8c",
+        "type": "csv",
+        "z": "bb72950cf85ad3fb",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "f7339a946ceab514",
+                "679b9b08b4238f5c"
+            ]
+        ]
+    },
+    {
+        "id": "f7339a946ceab514",
+        "type": "debug",
+        "z": "bb72950cf85ad3fb",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "679b9b08b4238f5c",
+        "type": "switch",
+        "z": "bb72950cf85ad3fb",
+        "name": "",
+        "property": "payload.mag",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "7",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 590,
+        "y": 280,
+        "wires": [
+            [
+                "08fd70e235bdb685"
+            ]
+        ]
+    },
+    {
+        "id": "08fd70e235bdb685",
+        "type": "change",
+        "z": "bb72950cf85ad3fb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "PANIC!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 340,
+        "wires": [
+            [
+                "196b7a4fd6668364"
+            ]
+        ]
+    },
+    {
+        "id": "196b7a4fd6668364",
+        "type": "debug",
+        "z": "bb72950cf85ad3fb",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 400,
+        "wires": []
+    }
+]
