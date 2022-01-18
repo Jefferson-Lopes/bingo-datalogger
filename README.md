@@ -66,6 +66,7 @@ When you create a new Node-red project anywhere else the default location, you h
 
 ## Reference
 
+* [IoT project with Esp32, IBM Watson and Node-RED](https://www.youtube.com/watch?v=T-Xg15Iokhg     )
 * [Node-red getting started](https://nodered.org/docs/getting-started/local)
 * [Node.js docs](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
 * [Node-red locally](https://nodered.org/docs/getting-started/local)
@@ -73,3 +74,6 @@ When you create a new Node-red project anywhere else the default location, you h
 * [Securing Node-red](https://nodered.org/docs/user-guide/runtime/securing-node-red)
 * [Node-red dashboard lib](https://flows.nodered.org/node/node-red-dashboard)
 * [Node-red projects](https://stevesnoderedguide.com/managing-node-red-projects)
+* [MQTT](https://mqtt.org/)
+* [MQTT and esp32 project](https://randomnerdtutorials.com/esp32-mqtt-publish-subscribe-arduino-ide/)
+* [local only issue](https://stackoverflow.com/questions/65278648/mosquitto-starting-in-local-only-mode)
