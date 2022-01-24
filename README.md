@@ -77,3 +77,4 @@ When you create a new Node-red project anywhere else the default location, you h
 * [MQTT](https://mqtt.org/)
 * [MQTT and esp32 project](https://randomnerdtutorials.com/esp32-mqtt-publish-subscribe-arduino-ide/)
 * [local only issue](https://stackoverflow.com/questions/65278648/mosquitto-starting-in-local-only-mode)
+* [pio tutorial](https://www.filipeflop.com/blog/como-programar-esp32-com-vs-code-e-platformio/)

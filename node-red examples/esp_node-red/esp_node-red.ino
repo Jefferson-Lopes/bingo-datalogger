@@ -3,10 +3,10 @@
 
 #define BUILTIN_LED 2
 
-#define SSID "LABMET"
-#define PASSWORD "labmet@dee"
-#define MQTT_SERVER "150.165.37.212"
-#define MQTT_PORT 1883
+#define SSID "xxxxxxxxx"
+#define PASSWORD "xxxxxxxxx"
+#define MQTT_SERVER "xxx.xxx.xxx.xxx"
+#define MQTT_PORT 000
 
 WiFiClient espClient;
 PubSubClient client(espClient);
