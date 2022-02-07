@@ -1,5 +1,26 @@
-# bingo-datalogger-backend
+# BINGO Telescope datalogger
+
 weather, vibration and tilt angle data logger for telescopic bingo antenna
+
+![dashboard](resource/dashboard.png)
+
+## Node-RED flows
+
+* MQTT_in flow 
+
+![mqtt in](resource/dashboard-mqtt_in.png)
+
+* MQTT_out flow
+
+![mqtt out](resource/dashboard-mqtt_out.png)
+
+* Database flow
+
+![database](resource/dashboard-database.png)
+
+* Console flow
+
+![console](resource/dashboard-console.png)
 
 ## Installing Node-RED v2.x with Node.js v14.x on ubuntu
 
@@ -78,3 +99,5 @@ When you create a new Node-red project anywhere else the default location, you h
 * [MQTT and esp32 project](https://randomnerdtutorials.com/esp32-mqtt-publish-subscribe-arduino-ide/)
 * [local only issue](https://stackoverflow.com/questions/65278648/mosquitto-starting-in-local-only-mode)
 * [pio tutorial](https://www.filipeflop.com/blog/como-programar-esp32-com-vs-code-e-platformio/)
+* [MySQL + Workbench](https://www.webmundi.com/banco-de-dados/mysql/como-instalar-mysql-mysql-workbench-no-linux/)
+* [Fundamentos do SQL](https://www.youtube.com/playlist?list=PLpdAy0tYrnKw_F8v6kkEXTeyE33Navv-K)
