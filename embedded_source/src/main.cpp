@@ -70,7 +70,6 @@ void loop() {
 
         MQTT_publish();
     }
-
 }
 
 void setup_wifi() {
@@ -158,40 +157,46 @@ void read_sensors(void) {
         hic = dht.computeHeatIndex(t, h, false);
 
     // read and calculate voltage level
-    Serial.println(analogRead(LNAVOLTAGEPIN));
     LNA_voltage = 3.3 * (analogRead(LNAVOLTAGEPIN) / 4095.0);
 }
 
 void MQTT_publish(void) {
     // Convert the temperature to a char array
-    char tempString[8];
-    dtostrf(t, 1, 2, tempString);
+    String tempString = String(t, 2);
     Serial.print("Temperature: ");
     Serial.print(tempString);
     Serial.print("°C\t");
-    client.publish("esp32/temperature", tempString);
 
     // Convert the humidity to a char array
-    char humiString[8];
-    dtostrf(h, 1, 2, humiString);
+    String humiString = String(h, 2);
     Serial.print("Humidity: ");
     Serial.print(humiString);
     Serial.print("%\t");
-    client.publish("esp32/humidity", humiString);
 
     // Convert the heat_index to a char array
-    char indexString[8];
-    dtostrf(hic, 1, 2, indexString);
+    String indexString = String(hic, 2);
     Serial.print("Heat index: ");
     Serial.print(indexString);
     Serial.print("°C\t");
-    client.publish("esp32/heat_index", indexString);
 
     // Convert the LNA_voltage to a char array
-    char voltageString[8];
-    dtostrf(LNA_voltage, 1, 2, voltageString);
+    String voltageString = String(LNA_voltage, 1);
     Serial.print("LNA voltage: ");
     Serial.print(voltageString);
-    Serial.print("V\t\n");
-    client.publish("esp32/LNA_voltage", voltageString);
+    Serial.print("V\n");
+
+    String sensors = tempString + ',' +
+                     humiString + ',' +
+                     indexString + ',' +
+                     voltageString;
+
+    char msg_topic[] = "esp32/sensors";   
+    char msg_payload[64];
+
+    sensors.toCharArray(msg_payload, 64);              
+    
+    client.publish(msg_topic, msg_payload);
+
+    Serial.print("msg sent: ");
+    Serial.println(msg_payload);
 }
