@@ -13,6 +13,7 @@
             "tours": {
                 "welcome": "2.1.4"
             }
-        }
+        },
+        "menu-menu-item-palette": true
     }
 }
