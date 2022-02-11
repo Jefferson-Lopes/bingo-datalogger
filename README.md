@@ -101,3 +101,4 @@ When you create a new Node-red project anywhere else the default location, you h
 * [pio tutorial](https://www.filipeflop.com/blog/como-programar-esp32-com-vs-code-e-platformio/)
 * [MySQL + Workbench](https://www.webmundi.com/banco-de-dados/mysql/como-instalar-mysql-mysql-workbench-no-linux/)
 * [Fundamentos do SQL](https://www.youtube.com/playlist?list=PLpdAy0tYrnKw_F8v6kkEXTeyE33Navv-K)
+* [Smooth node with reduce](https://discourse.nodered.org/t/adding-a-reduce-option-to-the-smooth-node/15180/3)
