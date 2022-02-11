@@ -66,9 +66,11 @@
     {
         "id": "e7c46d5e.a1283",
         "type": "ui_tab",
-        "name": "Dashboard",
+        "name": "BINGO dashboard",
         "icon": "dashboard",
-        "order": 1
+        "order": 1,
+        "disabled": false,
+        "hidden": false
     },
     {
         "id": "b86ff763183da0bc",
@@ -257,63 +259,15 @@
         "height": 1
     },
     {
-        "id": "bae3d674b57c9a95",
-        "type": "debug",
-        "z": "67626f61946a4f0c",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 610,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "e887dd774dccdd8c",
-        "type": "debug",
-        "z": "67626f61946a4f0c",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 610,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "162d1ef83090f8be",
-        "type": "debug",
-        "z": "67626f61946a4f0c",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 610,
-        "y": 380,
-        "wires": []
-    },
-    {
         "id": "39029ceb138f77d4",
         "type": "ui_chart",
         "z": "67626f61946a4f0c",
-        "name": "temperature C",
+        "name": "temp/indx",
         "group": "586114dd1fea9780",
         "order": 1,
         "width": "0",
         "height": "0",
-        "label": "weather °C",
+        "label": "Weather",
         "chartType": "line",
         "legend": "true",
         "xformat": "HH:mm:ss",
@@ -342,7 +296,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 640,
+        "x": 800,
         "y": 280,
         "wires": [
             []
@@ -352,13 +306,13 @@
         "id": "e912889a2a9dd425",
         "type": "ui_gauge",
         "z": "67626f61946a4f0c",
-        "name": "humidity G",
+        "name": "humidity",
         "group": "61285987.c20328",
         "order": 3,
         "width": "5",
         "height": "3",
         "gtype": "gage",
-        "title": "humidity",
+        "title": "Humidity",
         "label": "%",
         "format": "{{value}}",
         "min": 0,
@@ -368,10 +322,10 @@
             "#00b500",
             "#ca3838"
         ],
-        "seg1": "50",
-        "seg2": "60",
+        "seg1": "40",
+        "seg2": "70",
         "className": "",
-        "x": 610,
+        "x": 780,
         "y": 180,
         "wires": []
     },
@@ -379,7 +333,7 @@
         "id": "b90f022e1974b858",
         "type": "mqtt in",
         "z": "67626f61946a4f0c",
-        "name": "sensors",
+        "name": "sensors read",
         "topic": "esp32/sensors",
         "qos": "2",
         "datatype": "auto",
@@ -388,12 +342,15 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 110,
+        "x": 190,
         "y": 280,
         "wires": [
             [
-                "d6aa561de61ba2b3",
-                "8acc496f5f91504f"
+                "758b1069134cd75c",
+                "098d48bcb9de5d17",
+                "bd882f8640dab225",
+                "24f3cc95a98a5658",
+                "b4001990e063a16f"
             ]
         ]
     },
@@ -401,44 +358,26 @@
         "id": "24f3cc95a98a5658",
         "type": "function",
         "z": "67626f61946a4f0c",
-        "name": "get [0]",
-        "func": "msg.topic = \"temperature\";\nmsg.payload = msg.payload[0];\n\nreturn msg;",
+        "name": "get temp",
+        "func": "msg.topic = \"temperature\";\nmsg.payload = msg.payload.split(',')[0];\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 80,
+        "x": 400,
+        "y": 240,
         "wires": [
             [
-                "39029ceb138f77d4",
-                "bae3d674b57c9a95",
-                "5834e4af7bd65f60"
+                "95c23964ed3f1969"
             ]
         ]
-    },
-    {
-        "id": "a88c819860282fee",
-        "type": "debug",
-        "z": "67626f61946a4f0c",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 610,
-        "y": 500,
-        "wires": []
     },
     {
         "id": "49e273b23927da12",
         "type": "ui_chart",
         "z": "67626f61946a4f0c",
-        "name": "LNA voltage C",
+        "name": "LNA voltage",
         "group": "9ede52c32b977504",
         "order": 4,
         "width": 0,
@@ -472,8 +411,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 620,
-        "y": 420,
+        "x": 790,
+        "y": 380,
         "wires": [
             []
         ]
@@ -482,20 +421,18 @@
         "id": "758b1069134cd75c",
         "type": "function",
         "z": "67626f61946a4f0c",
-        "name": "get [1]",
-        "func": "msg.topic = \"humidity\";\nmsg.payload = msg.payload[1];\n\nreturn msg;",
+        "name": "get humi",
+        "func": "msg.topic = \"humidity\";\nmsg.payload = parseInt(msg.payload.split(',')[1]);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 180,
+        "x": 400,
+        "y": 160,
         "wires": [
             [
-                "e912889a2a9dd425",
-                "e887dd774dccdd8c",
-                "2ca31d9e2a60dd24"
+                "84585fb18f4dafdf"
             ]
         ]
     },
@@ -503,20 +440,18 @@
         "id": "098d48bcb9de5d17",
         "type": "function",
         "z": "67626f61946a4f0c",
-        "name": "get [2]",
-        "func": "msg.topic = \"heat index\";\nmsg.payload = msg.payload[2];\n\nreturn msg;",
+        "name": "get indx",
+        "func": "msg.topic = \"heat index\";\nmsg.payload = parseInt(msg.payload.split(',')[2]);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 360,
+        "x": 400,
+        "y": 320,
         "wires": [
             [
-                "162d1ef83090f8be",
-                "7ee806e9ad9a7c39",
-                "39029ceb138f77d4"
+                "1e80f54e4236dfd1"
             ]
         ]
     },
@@ -524,72 +459,32 @@
         "id": "bd882f8640dab225",
         "type": "function",
         "z": "67626f61946a4f0c",
-        "name": "get [3]",
-        "func": "msg.topic = \"LNA voltage\";\nmsg.payload = msg.payload[3];\n\nreturn msg;",
+        "name": "get volt",
+        "func": "msg.topic = \"LNA voltage\";\nmsg.payload = parseInt(msg.payload.split(',')[3]);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 460,
+        "x": 400,
+        "y": 400,
         "wires": [
             [
-                "49e273b23927da12",
-                "a88c819860282fee",
-                "7acd31657fc0ee48"
+                "667e8bed512f90cf"
             ]
         ]
-    },
-    {
-        "id": "d6aa561de61ba2b3",
-        "type": "function",
-        "z": "67626f61946a4f0c",
-        "name": "split",
-        "func": "msg.payload = msg.payload.split(',');\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 250,
-        "y": 280,
-        "wires": [
-            [
-                "24f3cc95a98a5658",
-                "758b1069134cd75c",
-                "098d48bcb9de5d17",
-                "bd882f8640dab225"
-            ]
-        ]
-    },
-    {
-        "id": "8acc496f5f91504f",
-        "type": "debug",
-        "z": "67626f61946a4f0c",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 230,
-        "y": 360,
-        "wires": []
     },
     {
         "id": "5834e4af7bd65f60",
         "type": "ui_gauge",
         "z": "67626f61946a4f0c",
-        "name": "temperature G",
+        "name": "temperature",
         "group": "61285987.c20328",
         "order": 1,
         "width": "5",
         "height": "3",
         "gtype": "gage",
-        "title": "temperature",
+        "title": "Temperature",
         "label": "°C",
         "format": "{{value}}",
         "min": 0,
@@ -600,22 +495,22 @@
             "#ca3838"
         ],
         "seg1": "20",
-        "seg2": "27",
+        "seg2": "30",
         "className": "",
-        "x": 620,
-        "y": 60,
+        "x": 790,
+        "y": 240,
         "wires": []
     },
     {
         "id": "2ca31d9e2a60dd24",
         "type": "ui_chart",
         "z": "67626f61946a4f0c",
-        "name": "humidity C",
+        "name": "humidity",
         "group": "586114dd1fea9780",
         "order": 2,
         "width": 0,
         "height": 0,
-        "label": "humidity %",
+        "label": "Humidity",
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm:ss",
@@ -644,7 +539,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 610,
+        "x": 780,
         "y": 140,
         "wires": [
             []
@@ -654,13 +549,13 @@
         "id": "7ee806e9ad9a7c39",
         "type": "ui_gauge",
         "z": "67626f61946a4f0c",
-        "name": "heat index G",
+        "name": "heat index",
         "group": "61285987.c20328",
         "order": 5,
         "width": "5",
         "height": "3",
         "gtype": "gage",
-        "title": "heat index",
+        "title": "Heat index",
         "label": "°C",
         "format": "{{value}}",
         "min": 0,
@@ -671,17 +566,17 @@
             "#ca3838"
         ],
         "seg1": "20",
-        "seg2": "27",
+        "seg2": "30",
         "className": "",
-        "x": 610,
-        "y": 340,
+        "x": 790,
+        "y": 320,
         "wires": []
     },
     {
         "id": "7acd31657fc0ee48",
         "type": "ui_gauge",
         "z": "67626f61946a4f0c",
-        "name": "LNA voltage G",
+        "name": "LNA voltage",
         "group": "9ede52c32b977504",
         "order": 3,
         "width": "5",
@@ -700,15 +595,112 @@
         "seg1": "1",
         "seg2": "2.7",
         "className": "",
-        "x": 620,
-        "y": 460,
+        "x": 790,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "95c23964ed3f1969",
+        "type": "smooth",
+        "z": "67626f61946a4f0c",
+        "name": "reduce points",
+        "property": "payload",
+        "action": "mean",
+        "count": "15",
+        "round": "2",
+        "mult": "single",
+        "reduce": true,
+        "x": 580,
+        "y": 240,
+        "wires": [
+            [
+                "5834e4af7bd65f60",
+                "39029ceb138f77d4"
+            ]
+        ]
+    },
+    {
+        "id": "84585fb18f4dafdf",
+        "type": "smooth",
+        "z": "67626f61946a4f0c",
+        "name": "reduce points",
+        "property": "payload",
+        "action": "mean",
+        "count": "15",
+        "round": "2",
+        "mult": "single",
+        "reduce": true,
+        "x": 580,
+        "y": 160,
+        "wires": [
+            [
+                "2ca31d9e2a60dd24",
+                "e912889a2a9dd425"
+            ]
+        ]
+    },
+    {
+        "id": "1e80f54e4236dfd1",
+        "type": "smooth",
+        "z": "67626f61946a4f0c",
+        "name": "reduce points",
+        "property": "payload",
+        "action": "mean",
+        "count": "15",
+        "round": "2",
+        "mult": "single",
+        "reduce": true,
+        "x": 580,
+        "y": 320,
+        "wires": [
+            [
+                "7ee806e9ad9a7c39",
+                "39029ceb138f77d4"
+            ]
+        ]
+    },
+    {
+        "id": "667e8bed512f90cf",
+        "type": "smooth",
+        "z": "67626f61946a4f0c",
+        "name": "reduce points",
+        "property": "payload",
+        "action": "mean",
+        "count": "5",
+        "round": "2",
+        "mult": "single",
+        "reduce": true,
+        "x": 580,
+        "y": 400,
+        "wires": [
+            [
+                "49e273b23927da12",
+                "7acd31657fc0ee48"
+            ]
+        ]
+    },
+    {
+        "id": "b4001990e063a16f",
+        "type": "debug",
+        "z": "67626f61946a4f0c",
+        "name": "raw data",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 180,
+        "y": 360,
         "wires": []
     },
     {
         "id": "54accdb3e9d0ba71",
         "type": "mqtt out",
         "z": "989208b4e6f620f2",
-        "name": "",
+        "name": "LNA control",
         "topic": "esp32/LNA_control",
         "qos": "2",
         "retain": "",
@@ -718,15 +710,15 @@
         "correl": "",
         "expiry": "",
         "broker": "22a8daeb9ea3f8c4",
-        "x": 550,
-        "y": 200,
+        "x": 530,
+        "y": 220,
         "wires": []
     },
     {
         "id": "426fab9220bffc4d",
         "type": "ui_switch",
         "z": "989208b4e6f620f2",
-        "name": "",
+        "name": "LNA switch",
         "label": "LNA control",
         "tooltip": "",
         "group": "9ede52c32b977504",
@@ -748,8 +740,8 @@
         "offcolor": "",
         "animate": true,
         "className": "",
-        "x": 270,
-        "y": 240,
+        "x": 290,
+        "y": 260,
         "wires": [
             [
                 "54accdb3e9d0ba71",
@@ -761,23 +753,24 @@
         "id": "da108b092ccb182e",
         "type": "debug",
         "z": "989208b4e6f620f2",
-        "name": "",
+        "name": "switch return",
         "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
         "x": 530,
-        "y": 280,
+        "y": 300,
         "wires": []
     },
     {
         "id": "c4eaf8a8d6143bf9",
         "type": "mqtt in",
         "z": "3d3c62a13ea8dab4",
-        "name": "sensors",
+        "name": "sensors read",
         "topic": "esp32/sensors",
         "qos": "2",
         "datatype": "auto",
@@ -786,8 +779,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 110,
-        "y": 160,
+        "x": 150,
+        "y": 260,
         "wires": [
             [
                 "3201aefd07e4dfef"
@@ -807,105 +800,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 640,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "bfe0192337985a5a",
-        "type": "mysql",
-        "z": "3d3c62a13ea8dab4",
-        "mydb": "93995bbe7b0de3be",
-        "name": "bingo database",
-        "x": 460,
-        "y": 340,
-        "wires": [
-            [
-                "88697d6ca572038f"
-            ]
-        ]
-    },
-    {
-        "id": "6b79612a23573811",
-        "type": "inject",
-        "z": "3d3c62a13ea8dab4",
-        "d": true,
-        "name": "inject",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payloadType": "date",
-        "x": 110,
-        "y": 380,
-        "wires": [
-            [
-                "053211e4c82e3e1e"
-            ]
-        ]
-    },
-    {
-        "id": "88697d6ca572038f",
-        "type": "debug",
-        "z": "3d3c62a13ea8dab4",
-        "name": "sql return",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 640,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "053211e4c82e3e1e",
-        "type": "function",
-        "z": "3d3c62a13ea8dab4",
-        "name": "sql insert",
-        "func": "var time = new Date();\n\nvar sql_insert = \"\";\nsql_insert += \"INSERT INTO sensors_read VALUE (\";\nsql_insert += time.getTime();\nsql_insert += \", \\\"\";\nsql_insert += time;\nsql_insert += \"\\\", 24.40, 59.70, 24.45, 3.0);\";\n\nmsg.topic = sql_insert;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 380,
-        "wires": [
-            [
-                "b0b0011326e2aa41",
-                "bfe0192337985a5a"
-            ]
-        ]
-    },
-    {
-        "id": "b0b0011326e2aa41",
-        "type": "debug",
-        "z": "3d3c62a13ea8dab4",
-        "name": "command",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "topic",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 440,
-        "y": 420,
+        "x": 700,
+        "y": 220,
         "wires": []
     },
     {
@@ -914,8 +810,8 @@
         "z": "3d3c62a13ea8dab4",
         "mydb": "93995bbe7b0de3be",
         "name": "bingo database",
-        "x": 460,
-        "y": 120,
+        "x": 520,
+        "y": 220,
         "wires": [
             [
                 "b1988ee5158e828f"
@@ -933,8 +829,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
-        "y": 160,
+        "x": 320,
+        "y": 260,
         "wires": [
             [
                 "544f6058de2a1d10",
@@ -946,7 +842,7 @@
         "id": "544f6058de2a1d10",
         "type": "debug",
         "z": "3d3c62a13ea8dab4",
-        "name": "command",
+        "name": "sql command",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -955,8 +851,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 440,
-        "y": 200,
+        "x": 510,
+        "y": 300,
         "wires": []
     },
     {
@@ -982,22 +878,6 @@
         ]
     },
     {
-        "id": "f54930693baea2e3",
-        "type": "debug",
-        "z": "bcca7bd820d2c27d",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 530,
-        "y": 280,
-        "wires": []
-    },
-    {
         "id": "9bb54d766b681ac1",
         "type": "ui_text",
         "z": "bcca7bd820d2c27d",
@@ -1005,14 +885,31 @@
         "order": 0,
         "width": 0,
         "height": 0,
-        "name": "debug",
+        "name": "dashboard console",
         "label": "console",
         "format": "{{msg.payload}}",
         "layout": "col-center",
         "className": "",
-        "x": 510,
-        "y": 240,
+        "x": 550,
+        "y": 220,
         "wires": [],
         "icon": "font-awesome/fa-desktop"
+    },
+    {
+        "id": "f54930693baea2e3",
+        "type": "debug",
+        "z": "bcca7bd820d2c27d",
+        "name": "debug input",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 300,
+        "wires": []
     }
 ]

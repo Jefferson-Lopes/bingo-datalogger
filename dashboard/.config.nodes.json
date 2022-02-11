@@ -663,5 +663,24 @@
                 "file": "/home/bingo/Documents/GitHub/bingo-datalogger/dashboard/node_modules/node-red-node-mysql/68-mysql.js"
             }
         }
+    },
+    "node-red-node-smooth": {
+        "name": "node-red-node-smooth",
+        "version": "0.1.2",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "smooth": {
+                "name": "smooth",
+                "types": [
+                    "smooth"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-node-smooth",
+                "file": "/home/bingo/Documents/GitHub/bingo-datalogger/dashboard/node_modules/node-red-node-smooth/17-smooth.js"
+            }
+        }
     }
 }
